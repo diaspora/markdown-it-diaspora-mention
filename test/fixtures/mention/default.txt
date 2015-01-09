@@ -27,9 +27,9 @@ prints the username for unknown users
 
 accepts multiple mentions per line
 .
-I mention @{User Name; user@pod.tld} and @{fo0 BaR; foo@bar.baz}
+I mention @{User Name; user@pod.tld} and @{fo0 BaR; foo@bar.baz} because they are awesome!
 .
-<p>I mention <a class="mention" href="/people/1337">User Name</a> and <a class="mention" href="/my/awesome/url">fo0 BaR</a></p>
+<p>I mention <a class="mention" href="/people/1337">User Name</a> and <a class="mention" href="/my/awesome/url">fo0 BaR</a> because they are awesome!</p>
 .
 
 
@@ -105,4 +105,31 @@ don't render @{mentions; user@pod.tld} in code blocks
 .
 <pre><code>don't render @{mentions; user@pod.tld} in code blocks
 </code></pre>
+.
+
+
+
+broken mentions
+.
+@{User Name; user@pod.tld
+.
+<p>@{User Name; user@pod.tld</p>
+.
+
+.
+@{User Name user@pod.tld}
+.
+<p>@{User Name user@pod.tld}</p>
+.
+
+.
+{User Name; user@pod.tld}
+.
+<p>{User Name; user@pod.tld}</p>
+.
+
+.
+{User Name;user@pod.tld}
+.
+<p>{User Name;user@pod.tld}</p>
 .
