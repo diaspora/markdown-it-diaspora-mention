@@ -1,0 +1,108 @@
+creates links for known users by guid
+.
+@{User Name; user@pod.tld}
+.
+<p><a class="mention" href="/people/1337">User Name</a></p>
+.
+
+
+
+creates links for known users by url
+.
+@{User Name; foo@bar.baz}
+.
+<p><a class="mention" href="/my/awesome/url">User Name</a></p>
+.
+
+
+
+prints the username for unknown users
+.
+@{User Name; unknown@pod.tld}
+.
+<p>User Name</p>
+.
+
+
+
+accepts multiple mentions per line
+.
+I mention @{User Name; user@pod.tld} and @{fo0 BaR; foo@bar.baz}
+.
+<p>I mention <a class="mention" href="/people/1337">User Name</a> and <a class="mention" href="/my/awesome/url">fo0 BaR</a></p>
+.
+
+
+
+doesn't break links
+.
+[@{User Name; user@pod.tld}](http://awe.so.me)
+.
+<p><a href="http://awe.so.me">@{User Name; user@pod.tld}</a></p>
+.
+
+.
+[mention @{User Name; user@pod.tld} for teh lulz](http://awe.so.me)
+.
+<p><a href="http://awe.so.me">mention @{User Name; user@pod.tld} for teh lulz</a></p>
+.
+
+.
+[link](http://awe.so.me "@{User Name; user@pod.tld}")
+.
+<p><a href="http://awe.so.me" title="@{User Name; user@pod.tld}">link</a></p>
+.
+
+.
+[link](http://awe.so.me "mention @{User Name; user@pod.tld} for teh lulz")
+.
+<p><a href="http://awe.so.me" title="mention @{User Name; user@pod.tld} for teh lulz">link</a></p>
+.
+
+
+
+doesn't break images
+.
+![@{User Name; user@pod.tld}](http://awe.so.me/image.gif)
+.
+<p><img src="http://awe.so.me/image.gif" alt="@{User Name; user@pod.tld}"></p>
+.
+
+.
+![mention @{User Name; user@pod.tld} for teh lulz](http://awe.so.me/image.gif)
+.
+<p><img src="http://awe.so.me/image.gif" alt="mention @{User Name; user@pod.tld} for teh lulz"></p>
+.
+
+.
+![image](http://awe.so.me/image.gif "@{User Name; user@pod.tld}")
+.
+<p><img src="http://awe.so.me/image.gif" alt="image" title="@{User Name; user@pod.tld}"></p>
+.
+
+.
+![image](http://awe.so.me/image.gif "mention @{User Name; user@pod.tld} for teh lulz")
+.
+<p><img src="http://awe.so.me/image.gif" alt="image" title="mention @{User Name; user@pod.tld} for teh lulz"></p>
+.
+
+
+
+respects inline code
+.
+`don't render @{mentions; user@pod.tld} in inline code`
+.
+<p><code>don't render @{mentions; user@pod.tld} in inline code</code></p>
+.
+
+
+
+respects code blocks
+.
+```
+don't render @{mentions; user@pod.tld} in code blocks
+```
+.
+<pre><code>don't render @{mentions; user@pod.tld} in code blocks
+</code></pre>
+.
