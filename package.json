@@ -1,7 +1,7 @@
 {
   "name": "markdown-it-diaspora-mention",
   "description": "diaspora* mentions for markdown-it markdown parser.",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "keywords": [
     "markdown-it-plugin",
     "markdown-it",
