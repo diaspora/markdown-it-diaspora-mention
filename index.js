@@ -6,7 +6,7 @@
 // Renderer partials
 
 function mention_open(tokens, idx) {
-  return '<a class="mention" href="' + tokens[idx].content + '">';
+  return '<a href="' + tokens[idx].content + '" class="mention">';
 }
 
 function mention_close() { return '</a>'; }
@@ -23,6 +23,7 @@ function isLinkClose(str) { return /^<\/a\s*>/i.test(str); }
 module.exports = function mention_plugin(md, mentions) {
 
   var arrayReplaceAt = md.utils.arrayReplaceAt;
+  var escapeHtml = md.utils.escapeHtml;
 
   function findPersonById(id) {
     var i;
@@ -118,7 +119,7 @@ module.exports = function mention_plugin(md, mentions) {
             });
             nodes.push({
               type: 'mention_text',
-              content: name,
+              content: escapeHtml(name),
               level: level
             });
             nodes.push({

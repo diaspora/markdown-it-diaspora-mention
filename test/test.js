@@ -20,6 +20,10 @@ describe('markdown-it-hashtag', function () {
         guid: 1337
       },
       {
+        diaspora_id: 'evil@pod.tld',
+        guid: 666
+      },
+      {
         handle: 'foo@bar.baz',
         url: '/my/awesome/url',
         guid: 42
@@ -27,11 +31,12 @@ describe('markdown-it-hashtag', function () {
     ]);
   });
 
-  it('applies markup to mentions', function () {
-    generate(path.join(__dirname, 'fixtures/mention/default.txt'), md);
-  });
-
   it('doesn\'t break normal markup', function () {
     generate(path.join(__dirname, 'fixtures/markdown-it'), md);
+  });
+
+  it('applies markup to mentions', function () {
+    md.set({ html: false });
+    generate(path.join(__dirname, 'fixtures/mention/default.txt'), md);
   });
 });

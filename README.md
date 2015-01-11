@@ -6,7 +6,7 @@
 
 > diaspora-style @mention plugin for [markdown-it](https://github.com/markdown-it/markdown-it) markdown parser.
 
-`@{User Name; user@pod.tld}` => `<a class="mention" href="/people/1337">User Name</a>`
+`@{User Name; user@pod.tld}` => `<a href="/people/1337" class="mention">User Name</a>`
 
 ## Install
 
@@ -33,8 +33,8 @@ var md = require('markdown-it')()
               }
             ]);
 
-md.render('@{User Name; user@pod.tld}'); // => `<a class="mention" href="/people/1337">User Name</a>`
-md.render('@{Foo Bar; foo@bar.baz}'); // => `<a class="mention" href="/my/awesome/url">Foo Bar</a>`
+md.render('@{User Name; user@pod.tld}'); // => '<a href="/people/1337" class="mention">User Name</a>'
+md.render('@{Foo Bar; foo@bar.baz}'); // => '<a href="/my/awesome/url" class="mention">Foo Bar</a>'
 ```
 
 _Differences in browser._ If you load the script directly into the page, without
