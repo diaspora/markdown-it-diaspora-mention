@@ -1,4 +1,4 @@
-/*! markdown-it-diaspora-mention 0.1.2 https://github.com/diaspora/markdown-it-diaspora-mention @license MIT */!function(e){if("object"==typeof exports&&"undefined"!=typeof module)module.exports=e();else if("function"==typeof define&&define.amd)define([],e);else{var n;"undefined"!=typeof window?n=window:"undefined"!=typeof global?n=global:"undefined"!=typeof self&&(n=self),n.markdownitDiasporaMention=e()}}(function(){var define,module,exports;return (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
+/*! markdown-it-diaspora-mention 0.2.0 https://github.com/diaspora/markdown-it-diaspora-mention @license MIT */!function(e){if("object"==typeof exports&&"undefined"!=typeof module)module.exports=e();else if("function"==typeof define&&define.amd)define([],e);else{var n;"undefined"!=typeof window?n=window:"undefined"!=typeof global?n=global:"undefined"!=typeof self&&(n=self),n.markdownitDiasporaMention=e()}}(function(){var define,module,exports;return (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
 // Process @mention
 
 'use strict';
@@ -7,7 +7,11 @@
 // Renderer partials
 
 function mention_open(tokens, idx) {
-  return '<a href="' + tokens[idx].content + '" class="mention">';
+  return '<a href="' +
+         tokens[idx].content +
+         '" class="' +
+         tokens[idx].linkclass +
+         '">';
 }
 
 function mention_close() { return '</a>'; }
@@ -21,10 +25,25 @@ function mention_text(tokens, idx) {
 function isLinkOpen(str)  { return /^<a[>\s]/i.test(str); }
 function isLinkClose(str) { return /^<\/a\s*>/i.test(str); }
 
-module.exports = function mention_plugin(md, mentions) {
+module.exports = function mention_plugin(md, options) {
 
   var arrayReplaceAt = md.utils.arrayReplaceAt;
   var escapeHtml = md.utils.escapeHtml;
+  var mentions = [];
+  var currentUserId;
+  var allowHovercards;
+
+  if (typeof options.mentions !== 'undefined') {
+    mentions = options.mentions;
+  }
+
+  if (typeof options.currentUserId !== 'undefined') {
+    currentUserId = options.currentUserId;
+  }
+
+  if (typeof options.allowHovercards !== 'undefined') {
+    allowHovercards = options.allowHovercards;
+  }
 
   function findPersonById(id) {
     var i;
@@ -48,6 +67,7 @@ module.exports = function mention_plugin(md, mentions) {
         name,
         diasporaId,
         person,
+        linkclass,
         text,
         nodes,
         level,
@@ -101,6 +121,7 @@ module.exports = function mention_plugin(md, mentions) {
           pos = text.indexOf(matches[m]);
           name       = match[1];
           diasporaId = match[2];
+          linkclass = 'mention';
 
           if (pos > 0) {
             nodes.push({
@@ -112,10 +133,15 @@ module.exports = function mention_plugin(md, mentions) {
 
 
           person = findPersonById(diasporaId);
+
           if (person) {
+            if (allowHovercards && person.guid !== currentUserId) {
+              linkclass += ' hovercardable';
+            }
             nodes.push({
               type: 'mention_open',
               content: person.url || '/people/' + person.guid,
+              linkclass: linkclass,
               level: level++
             });
             nodes.push({

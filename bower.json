@@ -1,7 +1,7 @@
 {
   "name": "markdown-it-diaspora-mention",
   "main": "dist/markdown-it-diaspora-mention.js",
-  "version": "0.1.2",
+  "version": "0.2.0",
   "description": "diaspora* mentions for markdown-it markdown parser",
   "keywords": [
     "markdown-it-plugin",

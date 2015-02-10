@@ -21,20 +21,24 @@ bower install markdown-it-diaspora-mention --save
 
 ```js
 var md = require('markdown-it')()
-            .use(require('markdown-it-diaspora-mention'), [
-              {
-                diaspora_id: 'user@pod.tld',
-                guid: 1337
-              },
-              {
-                handle: 'foo@bar.baz',
-                url: '/my/awesome/url',
-                guid: 42
-              }
-            ]);
+            .use(require('markdown-it-diaspora-mention'), {
+              mentions: [
+                {
+                  diaspora_id: 'user@pod.tld',
+                  guid: 1337
+                },
+                {
+                  handle: 'foo@bar.baz',
+                  url: '/my/awesome/url',
+                  guid: 42
+                }
+              ],
+              allowHovercards: true,
+              currentUserId: 1337
+            });
 
 md.render('@{User Name; user@pod.tld}'); // => '<a href="/people/1337" class="mention">User Name</a>'
-md.render('@{Foo Bar; foo@bar.baz}'); // => '<a href="/my/awesome/url" class="mention">Foo Bar</a>'
+md.render('@{Foo Bar; foo@bar.baz}'); // => '<a href="/my/awesome/url" class="mention hovercardable">Foo Bar</a>'
 ```
 
 _Differences in browser._ If you load the script directly into the page, without
