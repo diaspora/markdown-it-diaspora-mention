@@ -5,7 +5,7 @@ var generate = require('markdown-it-testgen');
 
 /*eslint-env mocha*/
 
-describe('markdown-it-hashtag', function () {
+describe('markdown-it-diaspora-mention', function () {
   var md;
 
   beforeEach(function () {
@@ -14,21 +14,25 @@ describe('markdown-it-hashtag', function () {
       langPrefix: '',
       typographer: true,
       linkify: true
-    }).use(require('../'), [
-      {
-        diaspora_id: 'user@pod.tld',
-        guid: 1337
-      },
-      {
-        diaspora_id: 'evil@pod.tld',
-        guid: 666
-      },
-      {
-        handle: 'foo@bar.baz',
-        url: '/my/awesome/url',
-        guid: 42
-      }
-    ]);
+    }).use(require('../'), {
+      mentions: [
+        {
+          diaspora_id: 'user@pod.tld',
+          guid: 1337
+        },
+        {
+          diaspora_id: 'evil@pod.tld',
+          guid: 666
+        },
+        {
+          handle: 'foo@bar.baz',
+          url: '/my/awesome/url',
+          guid: 42
+        }
+      ],
+      allowHovercards: true,
+      currentUserId: 1337
+    });
   });
 
   it('doesn\'t break normal markup', function () {

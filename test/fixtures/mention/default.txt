@@ -11,7 +11,7 @@ creates links for known users by url
 .
 @{User Name; foo@bar.baz}
 .
-<p><a href="/my/awesome/url" class="mention">User Name</a></p>
+<p><a href="/my/awesome/url" class="mention hovercardable">User Name</a></p>
 .
 
 
@@ -29,7 +29,7 @@ accepts multiple mentions per line
 .
 I mention @{User Name; user@pod.tld} and @{fo0 BaR; foo@bar.baz} because they are awesome!
 .
-<p>I mention <a href="/people/1337" class="mention">User Name</a> and <a href="/my/awesome/url" class="mention">fo0 BaR</a> because they are awesome!</p>
+<p>I mention <a href="/people/1337" class="mention">User Name</a> and <a href="/my/awesome/url" class="mention hovercardable">fo0 BaR</a> because they are awesome!</p>
 .
 
 
@@ -146,5 +146,5 @@ escapes html entities
 .
 @{<script>alert(0)</script>; evil@pod.tld}
 .
-<p><a href="/people/666" class="mention">&lt;script&gt;alert(0)&lt;/script&gt;</a></p>
+<p><a href="/people/666" class="mention hovercardable">&lt;script&gt;alert(0)&lt;/script&gt;</a></p>
 .

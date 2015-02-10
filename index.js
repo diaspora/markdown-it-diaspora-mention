@@ -6,7 +6,11 @@
 // Renderer partials
 
 function mention_open(tokens, idx) {
-  return '<a href="' + tokens[idx].content + '" class="mention">';
+  return '<a href="' +
+         tokens[idx].content +
+         '" class="' +
+         tokens[idx].linkclass +
+         '">';
 }
 
 function mention_close() { return '</a>'; }
@@ -20,10 +24,25 @@ function mention_text(tokens, idx) {
 function isLinkOpen(str)  { return /^<a[>\s]/i.test(str); }
 function isLinkClose(str) { return /^<\/a\s*>/i.test(str); }
 
-module.exports = function mention_plugin(md, mentions) {
+module.exports = function mention_plugin(md, options) {
 
   var arrayReplaceAt = md.utils.arrayReplaceAt;
   var escapeHtml = md.utils.escapeHtml;
+  var mentions = [];
+  var currentUserId;
+  var allowHovercards;
+
+  if (typeof options.mentions !== 'undefined') {
+    mentions = options.mentions;
+  }
+
+  if (typeof options.currentUserId !== 'undefined') {
+    currentUserId = options.currentUserId;
+  }
+
+  if (typeof options.allowHovercards !== 'undefined') {
+    allowHovercards = options.allowHovercards;
+  }
 
   function findPersonById(id) {
     var i;
@@ -47,6 +66,7 @@ module.exports = function mention_plugin(md, mentions) {
         name,
         diasporaId,
         person,
+        linkclass,
         text,
         nodes,
         level,
@@ -100,6 +120,7 @@ module.exports = function mention_plugin(md, mentions) {
           pos = text.indexOf(matches[m]);
           name       = match[1];
           diasporaId = match[2];
+          linkclass = 'mention';
 
           if (pos > 0) {
             nodes.push({
@@ -111,10 +132,15 @@ module.exports = function mention_plugin(md, mentions) {
 
 
           person = findPersonById(diasporaId);
+
           if (person) {
+            if (allowHovercards && person.guid !== currentUserId) {
+              linkclass += ' hovercardable';
+            }
             nodes.push({
               type: 'mention_open',
               content: person.url || '/people/' + person.guid,
+              linkclass: linkclass,
               level: level++
             });
             nodes.push({
