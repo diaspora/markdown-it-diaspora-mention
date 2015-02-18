@@ -148,3 +148,12 @@ escapes html entities
 .
 <p><a href="/people/666" class="mention hovercardable">&lt;script&gt;alert(0)&lt;/script&gt;</a></p>
 .
+
+
+
+removes trailing spaces
+.
+@{User Name ; user@pod.tld}
+.
+<p><a href="/people/1337" class="mention">User Name</a></p>
+.

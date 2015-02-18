@@ -145,7 +145,7 @@ module.exports = function mention_plugin(md, options) {
             });
             nodes.push({
               type: 'mention_text',
-              content: escapeHtml(name),
+              content: escapeHtml(name).trim(),
               level: level
             });
             nodes.push({
