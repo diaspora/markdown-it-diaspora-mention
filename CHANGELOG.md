@@ -1,3 +1,7 @@
+# 0.2.1
+
+* Remove trailing whitespaces in usernames
+
 # 0.2.0
 
 * Add hovercardable to mentions
