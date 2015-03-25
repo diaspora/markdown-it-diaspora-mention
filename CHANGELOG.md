@@ -1,3 +1,7 @@
+# 0.3.0
+
+* Use markdown-it 4
+
 # 0.2.1
 
 * Remove trailing whitespaces in usernames

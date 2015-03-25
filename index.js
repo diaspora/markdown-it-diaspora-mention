@@ -56,9 +56,11 @@ module.exports = function mention_plugin(md, options) {
 
   function mention(state) {
     var i, j, l, m,
-        token,
+        currentToken,
         tokens,
+        token,
         blockTokens = state.tokens,
+        Token = state.Token,
         htmlLinkLevel,
         matches,
         match,
@@ -79,41 +81,45 @@ module.exports = function mention_plugin(md, options) {
 
     for (j = 0, l = blockTokens.length; j < l; j++) {
       if (blockTokens[j].type !== 'inline') { continue; }
+
       tokens = blockTokens[j].children;
+
       htmlLinkLevel = 0;
 
       for (i = tokens.length - 1; i >= 0; i--) {
-        token = tokens[i];
+        currentToken = tokens[i];
 
         // skip content of markdown links
-        if (token.type === 'link_close') {
+        if (currentToken.type === 'link_close') {
           i--;
-          while (tokens[i].level !== token.level && tokens[i].type !== 'link_open') {
+          while (tokens[i].level !== currentToken.level && tokens[i].type !== 'link_open') {
             i--;
           }
           continue;
         }
 
         // skip content of html links
-        if (token.type === 'html_inline') {
+        if (currentToken.type === 'html_inline') {
           // we are going backwards, so isLinkOpen shows end of link
-          if (isLinkOpen(token.content) && htmlLinkLevel > 0) {
+          if (isLinkOpen(currentToken.content) && htmlLinkLevel > 0) {
             htmlLinkLevel--;
           }
-          if (isLinkClose(token.content)) {
+          if (isLinkClose(currentToken.content)) {
             htmlLinkLevel++;
           }
         }
         if (htmlLinkLevel > 0) { continue; }
 
-        if (token.type !== 'text') { continue; }
+        if (currentToken.type !== 'text') { continue; }
 
         // find mentions
-        text = token.content;
+        text = currentToken.content;
         matches = text.match(regexGlobal);
+
         if (matches === null) { continue; }
+
         nodes = [];
-        level = token.level;
+        level = currentToken.level;
 
         for (m = 0; m < matches.length; m++) {
           match = matches[m].match(regex);
@@ -123,11 +129,10 @@ module.exports = function mention_plugin(md, options) {
           linkclass = 'mention';
 
           if (pos > 0) {
-            nodes.push({
-              type: 'text',
-              content: text.slice(0, pos),
-              level: level
-            });
+            token         = new Token('text', '', 0);
+            token.content = text.slice(0, pos);
+            token.level   = level;
+            nodes.push(token);
           }
 
 
@@ -137,43 +142,40 @@ module.exports = function mention_plugin(md, options) {
             if (allowHovercards && person.guid !== currentUserId) {
               linkclass += ' hovercardable';
             }
-            nodes.push({
-              type: 'mention_open',
-              content: person.url || '/people/' + person.guid,
-              linkclass: linkclass,
-              level: level++
-            });
-            nodes.push({
-              type: 'mention_text',
-              content: escapeHtml(name).trim(),
-              level: level
-            });
-            nodes.push({
-              type: 'mention_close',
-              content: diasporaId,
-              level: --level
-            });
+
+            token           = new Token('mention_open', '', 1);
+            token.content   = person.url || '/people/' + person.guid;
+            token.linkclass = linkclass;
+            token.level     = level++;
+            nodes.push(token);
+
+            token           = new Token('mention_text', '', 0);
+            token.content   = escapeHtml(name).trim();
+            token.level     = level;
+            nodes.push(token);
+
+            token           = new Token('mention_close', '', -1);
+            token.level     = --level;
+            nodes.push(token);
+
           } else {
-            nodes.push({
-              type: 'text',
-              content: name,
-              level: level
-            });
+            token         = new Token('text', '', 0);
+            token.content = name;
+            token.level   = level;
+            nodes.push(token);
           }
           text = text.slice(pos + match[0].length);
         }
 
         if (text.length > 0) {
-          nodes.push({
-            type: 'text',
-            content: text,
-            level: state.level
-          });
+          token         = new Token('text', '', 0);
+          token.content = text;
+          token.level   = state.level;
+          nodes.push(token);
         }
 
         // replace current node
-        tokens = arrayReplaceAt(tokens, i, nodes);
-        blockTokens[j].children = tokens;
+        blockTokens[j].children = tokens = arrayReplaceAt(tokens, i, nodes);
       }
     }
   }
