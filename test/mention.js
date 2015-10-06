@@ -3,8 +3,6 @@
 var path     = require('path');
 var generate = require('markdown-it-testgen');
 
-/*eslint-env mocha*/
-
 describe('markdown-it-diaspora-mention', function () {
   var md;
 
@@ -33,10 +31,6 @@ describe('markdown-it-diaspora-mention', function () {
       allowHovercards: true,
       currentUserId: 1337
     });
-  });
-
-  it('doesn\'t break normal markup', function () {
-    generate(path.join(__dirname, 'fixtures/markdown-it'), md);
   });
 
   it('applies markup to mentions', function () {
