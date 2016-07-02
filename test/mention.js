@@ -1,31 +1,33 @@
-'use strict';
+"use strict";
 
-var path     = require('path');
-var generate = require('markdown-it-testgen');
+const path = require("path"),
+      generate = require("markdown-it-testgen"),
+      MarkdownIt = require("markdown-it"),
+      mentionPlugin = require("../");
 
-describe('markdown-it-diaspora-mention', function () {
-  var md;
+describe("markdown-it-diaspora-mention", function() {
+  let md;
 
-  beforeEach(function () {
-    md = require('markdown-it')({
+  beforeEach(function() {
+    md = new MarkdownIt({
       html: true,
-      langPrefix: '',
+      langPrefix: "",
       typographer: true,
       linkify: true
-    }).use(require('../'), {
+    }).use(mentionPlugin, {
       mentions: [
         {
-          diaspora_id: 'user@pod.tld',
-          guid: 1337
+          "diaspora_id": "user@pod.tld",
+          "guid": 1337
         },
         {
-          diaspora_id: 'evil@pod.tld',
-          guid: 666
+          "diaspora_id": "evil@pod.tld",
+          "guid": 666
         },
         {
-          handle: 'foo@bar.baz',
-          url: '/my/awesome/url',
-          guid: 42
+          "handle": "foo@bar.baz",
+          "url": "/my/awesome/url",
+          "guid": 42
         }
       ],
       allowHovercards: true,
@@ -33,8 +35,8 @@ describe('markdown-it-diaspora-mention', function () {
     });
   });
 
-  it('applies markup to mentions', function () {
-    md.set({ html: false });
-    generate(path.join(__dirname, 'fixtures/mention/default.txt'), md);
+  it("applies markup to mentions", function() {
+    md.set({html: false});
+    generate(path.join(__dirname, "fixtures/mention/default.txt"), md);
   });
 });
