@@ -30,7 +30,7 @@ browserify:
 	mkdir dist
 	# Browserify
 	( printf "/*! ${NPM_PACKAGE} ${NPM_VERSION} ${GITHUB_PROJ} @license MIT */" ; \
-		browserify ./ -s markdownitDiasporaMention \
+		browserify ./ -s markdownitDiasporaMention -t [ babelify --presets [ es2015 ] ] \
 		) > dist/markdown-it-diaspora-mention.js
 	# Minify
 	uglifyjs dist/markdown-it-diaspora-mention.js -b beautify=false,ascii-only=true -c -m \
