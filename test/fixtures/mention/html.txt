@@ -1,0 +1,37 @@
+doesn't break html links
+.
+<a href="http://awe.so.me">@{User Name; user@pod.tld}</a>
+.
+<p><a href="http://awe.so.me">@{User Name; user@pod.tld}</a></p>
+.
+
+.
+<a href="http://awe.so.me">mention @{User Name; user@pod.tld} for teh lulz</a>
+.
+<p><a href="http://awe.so.me">mention @{User Name; user@pod.tld} for teh lulz</a></p>
+.
+
+.
+<a href="http://awe.so.me">
+@{User Name; user@pod.tld}
+</a>
+.
+<a href="http://awe.so.me">
+@{User Name; user@pod.tld}
+</a>
+.
+
+
+
+doesn't render mentions with inline html
+.
+@{<script>alert(0)</script>; unknown@pod.tld}
+.
+<p>@{<script>alert(0)</script>; unknown@pod.tld}</p>
+.
+
+.
+@{<script>alert(0)</script>; evil@pod.tld}
+.
+<p>@{<script>alert(0)</script>; evil@pod.tld}</p>
+.

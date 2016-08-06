@@ -34,7 +34,7 @@ I mention @{User Name; user@pod.tld} and @{fo0 BaR; foo@bar.baz} because they ar
 
 
 
-doesn't break links
+doesn't break markdown links
 .
 [@{User Name; user@pod.tld}](http://awe.so.me)
 .
@@ -132,21 +132,6 @@ broken mentions
 {User Name;user@pod.tld}
 .
 <p>{User Name;user@pod.tld}</p>
-.
-
-
-
-escapes html entities
-.
-@{<script>alert(0)</script>; unknown@pod.tld}
-.
-<p>&lt;script&gt;alert(0)&lt;/script&gt;</p>
-.
-
-.
-@{<script>alert(0)</script>; evil@pod.tld}
-.
-<p><a href="/people/666" class="mention hovercardable">&lt;script&gt;alert(0)&lt;/script&gt;</a></p>
 .
 
 

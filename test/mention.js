@@ -1,5 +1,3 @@
-"use strict";
-
 const path = require("path"),
       generate = require("markdown-it-testgen"),
       MarkdownIt = require("markdown-it"),
@@ -36,7 +34,13 @@ describe("markdown-it-diaspora-mention", function() {
   });
 
   it("applies markup to mentions", function() {
+    generate(path.join(__dirname, "fixtures/mention/base.txt"), md);
+    generate(path.join(__dirname, "fixtures/mention/html.txt"), md);
+  });
+
+  it("applies markup to mentions with disabled html", function() {
     md.set({html: false});
-    generate(path.join(__dirname, "fixtures/mention/default.txt"), md);
+    generate(path.join(__dirname, "fixtures/mention/base.txt"), md);
+    generate(path.join(__dirname, "fixtures/mention/nohtml.txt"), md);
   });
 });
