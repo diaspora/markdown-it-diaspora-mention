@@ -136,11 +136,9 @@ class MentionPlugin {
   }
 
   parseMentions(state) {
-    const blockTokens = state.tokens;
-
-    blockTokens.map((blockToken) => {
+    state.tokens.forEach((blockToken) => {
       if (blockToken.type !== "inline") {
-        return blockToken;
+        return;
       }
 
       this.inMarkdownLink = false;
@@ -153,7 +151,7 @@ class MentionPlugin {
         return this.mentionTokens(currentToken, state);
       }).reduce((a, b) => a.concat(b), []);
 
-      return blockToken;
+      return;
     });
   }
 }
