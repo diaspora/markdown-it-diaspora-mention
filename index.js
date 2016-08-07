@@ -68,10 +68,7 @@ class MentionPlugin {
         this.htmlLinkLevel++;
       }
     }
-    if (this.htmlLinkLevel > 0) {
-      return true;
-    }
-    return false;
+    return this.htmlLinkLevel > 0;
   }
 
   /*
