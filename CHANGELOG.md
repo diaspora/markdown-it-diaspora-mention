@@ -1,3 +1,8 @@
+# 1.0.0
+
+* Drop support for nodejs versions < 6
+* Major refactoring of the plugin using ES2015 features
+
 # 0.4.0
 
 * Update markdown-it to 5.0.0
