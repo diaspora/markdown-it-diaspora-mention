@@ -1,0 +1,20 @@
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+src line: 410
+
+.
+>		foo
+.
+<blockquote>
+<pre><code>  foo
+</code></pre>
+</blockquote>
+.
+
+error:
+
+<blockquote>
+<pre><code>	foo
+</code></pre>
+</blockquote>
+
+
