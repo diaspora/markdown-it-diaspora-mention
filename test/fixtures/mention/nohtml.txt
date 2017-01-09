@@ -2,11 +2,17 @@ escapes html entities
 .
 @{<script>alert(0)</script>; unknown@pod.tld}
 .
-<p>&lt;script&gt;alert(0)&lt;/script&gt;</p>
+<p>unknown@pod.tld</p>
 .
 
 .
 @{<script>alert(0)</script>; evil@pod.tld}
+.
+<p><a href="/people/666" class="mention hovercardable">&lt;script&gt;alert(0)&lt;/script&gt;</a></p>
+.
+
+.
+@{evil@pod.tld}
 .
 <p><a href="/people/666" class="mention hovercardable">&lt;script&gt;alert(0)&lt;/script&gt;</a></p>
 .

@@ -6,9 +6,21 @@ doesn't break html links
 .
 
 .
+<a href="http://awe.so.me">@{user@pod.tld}</a>
+.
+<p><a href="http://awe.so.me">@{user@pod.tld}</a></p>
+.
+
+.
 <a href="http://awe.so.me">mention @{User Name; user@pod.tld} for teh lulz</a>
 .
 <p><a href="http://awe.so.me">mention @{User Name; user@pod.tld} for teh lulz</a></p>
+.
+
+.
+<a href="http://awe.so.me">mention @{user@pod.tld} for teh lulz</a>
+.
+<p><a href="http://awe.so.me">mention @{user@pod.tld} for teh lulz</a></p>
 .
 
 .
@@ -18,6 +30,16 @@ doesn't break html links
 .
 <a href="http://awe.so.me">
 @{User Name; user@pod.tld}
+</a>
+.
+
+.
+<a href="http://awe.so.me">
+@{user@pod.tld}
+</a>
+.
+<a href="http://awe.so.me">
+@{user@pod.tld}
 </a>
 .
 

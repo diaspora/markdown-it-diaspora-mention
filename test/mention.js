@@ -16,16 +16,24 @@ describe("markdown-it-diaspora-mention", function() {
       mentions: [
         {
           "diaspora_id": "user@pod.tld",
-          "guid": 1337
+          "guid": 1337,
+          "name": "User Name"
+        },
+        {
+          "diaspora_id": "userwithspaces@pod.tld",
+          "guid": 1338,
+          "name": "User Name "
         },
         {
           "diaspora_id": "evil@pod.tld",
-          "guid": 666
+          "guid": 666,
+          "name": "<script>alert(0)</script>"
         },
         {
           "handle": "foo@bar.baz",
           "url": "/my/awesome/url",
-          "guid": 42
+          "guid": 42,
+          "name": "User Foo"
         }
       ],
       allowHovercards: true,

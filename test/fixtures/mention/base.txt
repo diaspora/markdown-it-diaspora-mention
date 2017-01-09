@@ -5,22 +5,49 @@ creates links for known users by guid
 <p><a href="/people/1337" class="mention">User Name</a></p>
 .
 
+.
+@{user@pod.tld}
+.
+<p><a href="/people/1337" class="mention">User Name</a></p>
+.
+
 
 
 creates links for known users by url
 .
-@{User Name; foo@bar.baz}
+@{User Foo; foo@bar.baz}
 .
-<p><a href="/my/awesome/url" class="mention hovercardable">User Name</a></p>
+<p><a href="/my/awesome/url" class="mention hovercardable">User Foo</a></p>
+.
+
+.
+@{foo@bar.baz}
+.
+<p><a href="/my/awesome/url" class="mention hovercardable">User Foo</a></p>
 .
 
 
 
-prints the username for unknown users
+uses the name given in the person objects instead of the one given in the mention itself
+.
+@{Some Other Name; user@pod.tld}
+.
+<p><a href="/people/1337" class="mention">User Name</a></p>
+.
+
+
+
+prints the diaspora id for unknown users
 .
 @{User Name; unknown@pod.tld}
 .
-<p>User Name</p>
+<p>unknown@pod.tld</p>
+.
+
+.
+@{unknown@pod.tld}
+.
+<p>unknown@pod.tld</p>
 .
 
 
@@ -29,7 +56,19 @@ accepts multiple mentions per line
 .
 I mention @{User Name; user@pod.tld} and @{fo0 BaR; foo@bar.baz} because they are awesome!
 .
-<p>I mention <a href="/people/1337" class="mention">User Name</a> and <a href="/my/awesome/url" class="mention hovercardable">fo0 BaR</a> because they are awesome!</p>
+<p>I mention <a href="/people/1337" class="mention">User Name</a> and <a href="/my/awesome/url" class="mention hovercardable">User Foo</a> because they are awesome!</p>
+.
+
+.
+I mention @{user@pod.tld} and @{foo@bar.baz} because they are awesome!
+.
+<p>I mention <a href="/people/1337" class="mention">User Name</a> and <a href="/my/awesome/url" class="mention hovercardable">User Foo</a> because they are awesome!</p>
+.
+
+.
+I mention @{User Name; user@pod.tld} and @{foo@bar.baz} because they are awesome!
+.
+<p>I mention <a href="/people/1337" class="mention">User Name</a> and <a href="/my/awesome/url" class="mention hovercardable">User Foo</a> because they are awesome!</p>
 .
 
 
@@ -42,9 +81,21 @@ doesn't break markdown links
 .
 
 .
+[@{user@pod.tld}](http://awe.so.me)
+.
+<p><a href="http://awe.so.me">@{user@pod.tld}</a></p>
+.
+
+.
 [mention @{User Name; user@pod.tld} for teh lulz](http://awe.so.me)
 .
 <p><a href="http://awe.so.me">mention @{User Name; user@pod.tld} for teh lulz</a></p>
+.
+
+.
+[mention @{user@pod.tld} for teh lulz](http://awe.so.me)
+.
+<p><a href="http://awe.so.me">mention @{user@pod.tld} for teh lulz</a></p>
 .
 
 .
@@ -54,9 +105,21 @@ doesn't break markdown links
 .
 
 .
+[link](http://awe.so.me "@{user@pod.tld}")
+.
+<p><a href="http://awe.so.me" title="@{user@pod.tld}">link</a></p>
+.
+
+.
 [link](http://awe.so.me "mention @{User Name; user@pod.tld} for teh lulz")
 .
 <p><a href="http://awe.so.me" title="mention @{User Name; user@pod.tld} for teh lulz">link</a></p>
+.
+
+.
+[link](http://awe.so.me "mention @{user@pod.tld} for teh lulz")
+.
+<p><a href="http://awe.so.me" title="mention @{user@pod.tld} for teh lulz">link</a></p>
 .
 
 
@@ -69,9 +132,21 @@ doesn't break images
 .
 
 .
+![@{user@pod.tld}](http://awe.so.me/image.gif)
+.
+<p><img src="http://awe.so.me/image.gif" alt="@{user@pod.tld}"></p>
+.
+
+.
 ![mention @{User Name; user@pod.tld} for teh lulz](http://awe.so.me/image.gif)
 .
 <p><img src="http://awe.so.me/image.gif" alt="mention @{User Name; user@pod.tld} for teh lulz"></p>
+.
+
+.
+![mention @{user@pod.tld} for teh lulz](http://awe.so.me/image.gif)
+.
+<p><img src="http://awe.so.me/image.gif" alt="mention @{user@pod.tld} for teh lulz"></p>
 .
 
 .
@@ -81,9 +156,21 @@ doesn't break images
 .
 
 .
+![image](http://awe.so.me/image.gif "@{user@pod.tld}")
+.
+<p><img src="http://awe.so.me/image.gif" alt="image" title="@{user@pod.tld}"></p>
+.
+
+.
 ![image](http://awe.so.me/image.gif "mention @{User Name; user@pod.tld} for teh lulz")
 .
 <p><img src="http://awe.so.me/image.gif" alt="image" title="mention @{User Name; user@pod.tld} for teh lulz"></p>
+.
+
+.
+![image](http://awe.so.me/image.gif "mention @{user@pod.tld} for teh lulz")
+.
+<p><img src="http://awe.so.me/image.gif" alt="image" title="mention @{user@pod.tld} for teh lulz"></p>
 .
 
 
@@ -93,6 +180,12 @@ respects inline code
 `don't render @{mentions; user@pod.tld} in inline code`
 .
 <p><code>don't render @{mentions; user@pod.tld} in inline code</code></p>
+.
+
+.
+`don't render @{user@pod.tld} in inline code`
+.
+<p><code>don't render @{user@pod.tld} in inline code</code></p>
 .
 
 
@@ -107,6 +200,15 @@ don't render @{mentions; user@pod.tld} in code blocks
 </code></pre>
 .
 
+.
+```
+don't render @{user@pod.tld} in code blocks
+```
+.
+<pre><code>don't render @{user@pod.tld} in code blocks
+</code></pre>
+.
+
 
 
 broken mentions
@@ -114,6 +216,12 @@ broken mentions
 @{User Name; user@pod.tld
 .
 <p>@{User Name; user@pod.tld</p>
+.
+
+.
+@{user@pod.tld
+.
+<p>@{user@pod.tld</p>
 .
 
 .
@@ -134,11 +242,35 @@ broken mentions
 <p>{User Name;user@pod.tld}</p>
 .
 
+.
+@{User Name; user@pod.tld }
+.
+<p>@{User Name; user@pod.tld }</p>
+.
+
+.
+@{user@pod.tld }
+.
+<p>@{user@pod.tld }</p>
+.
+
+.
+@{ user@pod.tld}
+.
+<p>@{ user@pod.tld}</p>
+.
+
 
 
 removes trailing spaces
 .
-@{User Name ; user@pod.tld}
+@{User Name; userwithspaces@pod.tld}
 .
-<p><a href="/people/1337" class="mention">User Name</a></p>
+<p><a href="/people/1338" class="mention hovercardable">User Name</a></p>
 .
+
+removes trailing spaces
+.
+@{userwithspaces@pod.tld}
+.
+<p><a href="/people/1338" class="mention hovercardable">User Name</a></p>
