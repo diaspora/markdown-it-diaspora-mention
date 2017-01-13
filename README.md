@@ -7,6 +7,7 @@
 > diaspora-style @mention plugin for [markdown-it](https://github.com/markdown-it/markdown-it) markdown parser.
 
 `@{user@pod.tld}` => `<a href="/people/1337" class="mention">User Name</a>`
+
 `@{User Name; user@pod.tld}` => `<a href="/people/1337" class="mention">User Name</a>`
 
 ## Install
