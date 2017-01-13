@@ -28,22 +28,25 @@ creates links for known users by url
 
 
 
-uses the name given in the person objects instead of the one given in the mention itself
+uses the name given in mention itself if it exists
 .
-@{Some Other Name; user@pod.tld}
+@{Alice Awesome; user@pod.tld}
 .
-<p><a href="/people/1337" class="mention">User Name</a></p>
+<p><a href="/people/1337" class="mention">Alice Awesome</a></p>
+.
+
+
+
+uses the name for unknown users if it exists
+.
+@{Mysterious User; unknown@pod.tld}
+.
+<p>Mysterious User</p>
 .
 
 
 
-prints the diaspora id for unknown users
-.
-@{User Name; unknown@pod.tld}
-.
-<p>unknown@pod.tld</p>
-.
-
+uses the diaspora id for unknown users with no name given
 .
 @{unknown@pod.tld}
 .
@@ -54,7 +57,7 @@ prints the diaspora id for unknown users
 
 accepts multiple mentions per line
 .
-I mention @{User Name; user@pod.tld} and @{fo0 BaR; foo@bar.baz} because they are awesome!
+I mention @{User Name; user@pod.tld} and @{User Foo; foo@bar.baz} because they are awesome!
 .
 <p>I mention <a href="/people/1337" class="mention">User Name</a> and <a href="/my/awesome/url" class="mention hovercardable">User Foo</a> because they are awesome!</p>
 .
@@ -269,7 +272,12 @@ removes trailing spaces
 <p><a href="/people/1338" class="mention hovercardable">User Name</a></p>
 .
 
-removes trailing spaces
+.
+@{Name with trailing spaces    ; userwithspaces@pod.tld}
+.
+<p><a href="/people/1338" class="mention hovercardable">Name with trailing spaces</a></p>
+.
+
 .
 @{userwithspaces@pod.tld}
 .

@@ -7,7 +7,7 @@ const mentionOpen = (tokens, idx) => `<a href="${tokens[idx].content}" class="${
       linkCloseRegExp = /^<\/a\s*>/i,
       isLinkOpen = (str) => linkOpenRegExp.test(str),
       isLinkClose = (str) => linkCloseRegExp.test(str),
-      mentionRegExpPattern = "@\\{(?:[^;]+; )?([^\\} ]+)\\}",
+      mentionRegExpPattern = "@\\{(?:([^;]+); )?([^\\} ]+)\\}",
       mentionRegExp = new RegExp(mentionRegExpPattern),
       mentionRegExpGlobal = new RegExp(mentionRegExpPattern, "g");
 
@@ -86,7 +86,7 @@ class MentionPlugin {
     }
 
     matches.forEach((match) => {
-      let [matchedText, diasporaId] = match.match(mentionRegExp),
+      let [matchedText, name, diasporaId] = match.match(mentionRegExp),
           pos = text.indexOf(match);
 
       if (pos > 0) {
@@ -106,7 +106,7 @@ class MentionPlugin {
         tokens.push(token);
 
         token = new state.Token("mention_text", "", 0);
-        token.content = this.escapeHtml(person.name).trim();
+        token.content = this.escapeHtml(name ? name : person.name).trim();
         token.level = level;
         tokens.push(token);
 
@@ -115,7 +115,7 @@ class MentionPlugin {
         tokens.push(token);
       } else {
         token = new state.Token("text", "", 0);
-        token.content = diasporaId;
+        token.content = name ? name : diasporaId;
         token.level = level;
         tokens.push(token);
       }

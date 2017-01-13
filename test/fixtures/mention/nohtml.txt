@@ -2,7 +2,7 @@ escapes html entities
 .
 @{<script>alert(0)</script>; unknown@pod.tld}
 .
-<p>unknown@pod.tld</p>
+<p>&lt;script&gt;alert(0)&lt;/script&gt;</p>
 .
 
 .
