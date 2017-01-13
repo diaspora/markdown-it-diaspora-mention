@@ -1,3 +1,7 @@
+# 1.1.0
+
+* Add support for new mention syntax `@{user@pod.tld}`
+
 # 1.0.0
 
 * Drop support for nodejs versions < 6
