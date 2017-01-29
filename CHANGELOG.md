@@ -1,3 +1,7 @@
+# 1.1.1
+
+* Fix mentions for user names with semicolons
+
 # 1.1.0
 
 * Add support for new mention syntax `@{user@pod.tld}`
