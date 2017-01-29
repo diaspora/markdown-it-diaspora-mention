@@ -76,6 +76,15 @@ I mention @{User Name; user@pod.tld} and @{foo@bar.baz} because they are awesome
 
 
 
+allows semicolons in user names
+.
+@{Alice; Awesome; user@pod.tld}
+.
+<p><a href="/people/1337" class="mention">Alice; Awesome</a></p>
+.
+
+
+
 doesn't break markdown links
 .
 [@{User Name; user@pod.tld}](http://awe.so.me)

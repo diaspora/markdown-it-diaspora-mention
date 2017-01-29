@@ -7,7 +7,7 @@ const mentionOpen = (tokens, idx) => `<a href="${tokens[idx].content}" class="${
       linkCloseRegExp = /^<\/a\s*>/i,
       isLinkOpen = (str) => linkOpenRegExp.test(str),
       isLinkClose = (str) => linkCloseRegExp.test(str),
-      mentionRegExpPattern = "@\\{(?:([^;]+); )?([^\\} ]+)\\}",
+      mentionRegExpPattern = "@\\{(?:([^}]+); )?([^\\} ]+)\\}",
       mentionRegExp = new RegExp(mentionRegExpPattern),
       mentionRegExpGlobal = new RegExp(mentionRegExpPattern, "g");
 
