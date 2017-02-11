@@ -1,4 +1,4 @@
-/*! markdown-it-diaspora-mention 1.1.1 https://github.com/diaspora/markdown-it-diaspora-mention @license MIT */(function(f){if(typeof exports==="object"&&typeof module!=="undefined"){module.exports=f()}else if(typeof define==="function"&&define.amd){define([],f)}else{var g;if(typeof window!=="undefined"){g=window}else if(typeof global!=="undefined"){g=global}else if(typeof self!=="undefined"){g=self}else{g=this}g.markdownitDiasporaMention = f()}})(function(){var define,module,exports;return (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
+/*! markdown-it-diaspora-mention 1.2.0 https://github.com/diaspora/markdown-it-diaspora-mention @license MIT */(function(f){if(typeof exports==="object"&&typeof module!=="undefined"){module.exports=f()}else if(typeof define==="function"&&define.amd){define([],f)}else{var g;if(typeof window!=="undefined"){g=window}else if(typeof global!=="undefined"){g=global}else if(typeof self!=="undefined"){g=self}else{g=this}g.markdownitDiasporaMention = f()}})(function(){var define,module,exports;return (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
 require('../../modules/es6.array.find');
 module.exports = require('../../modules/_core').Array.find;
 },{"../../modules/_core":9,"../../modules/es6.array.find":33}],2:[function(require,module,exports){
@@ -395,11 +395,10 @@ var mentionOpen = function mentionOpen(tokens, idx) {
 
 var MentionPlugin = function () {
   function MentionPlugin(md) {
-    var _ref = arguments.length <= 1 || arguments[1] === undefined ? { mentions: [], allowHovercards: false } : arguments[1];
-
-    var mentions = _ref.mentions;
-    var allowHovercards = _ref.allowHovercards;
-    var currentUserId = _ref.currentUserId;
+    var _ref = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : { mentions: [], allowHovercards: false },
+        mentions = _ref.mentions,
+        allowHovercards = _ref.allowHovercards,
+        currentUserId = _ref.currentUserId;
 
     _classCallCheck(this, MentionPlugin);
 
@@ -490,14 +489,12 @@ var MentionPlugin = function () {
       }
 
       matches.forEach(function (match) {
-        var _match$match = match.match(mentionRegExp);
-
-        var _match$match2 = _slicedToArray(_match$match, 3);
-
-        var matchedText = _match$match2[0];
-        var name = _match$match2[1];
-        var diasporaId = _match$match2[2];
-        var pos = text.indexOf(match);
+        var _match$match = match.match(mentionRegExp),
+            _match$match2 = _slicedToArray(_match$match, 3),
+            matchedText = _match$match2[0],
+            name = _match$match2[1],
+            diasporaId = _match$match2[2],
+            pos = text.indexOf(match);
 
         if (pos > 0) {
           token = new state.Token("text", "", 0);
@@ -505,6 +502,11 @@ var MentionPlugin = function () {
           token.level = level;
           tokens.push(token);
         }
+
+        token = new state.Token("text", "", 0);
+        token.content = "@";
+        token.level = level;
+        tokens.push(token);
 
         var person = _this.findPersonById(diasporaId);
 

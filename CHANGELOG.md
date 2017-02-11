@@ -1,3 +1,7 @@
+# 1.2.0
+
+* Display @ in front of mentions
+
 # 1.1.1
 
 * Fix mentions for user names with semicolons
