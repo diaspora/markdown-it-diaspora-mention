@@ -6,9 +6,9 @@
 
 > diaspora-style @mention plugin for [markdown-it](https://github.com/markdown-it/markdown-it) markdown parser.
 
-`@{user@pod.tld}` => `<a href="/people/1337" class="mention">User Name</a>`
+`@{user@pod.tld}` => `@<a href="/people/1337" class="mention">User Name</a>`
 
-`@{User Name; user@pod.tld}` => `<a href="/people/1337" class="mention">User Name</a>`
+`@{User Name; user@pod.tld}` => `@<a href="/people/1337" class="mention">User Name</a>`
 
 ## Install
 
@@ -41,9 +41,9 @@ var md = require("markdown-it")()
               currentUserId: 1337
             });
 
-md.render("@{User Name; user@pod.tld}"); // => "<a href='/people/1337' class='mention'>User Name</a>"
-md.render("@{user@pod.tld}"); // => "<a href='/people/1337' class='mention'>Alice Awesome</a>"
-md.render("@{Foo Bar; foo@bar.baz}"); // => "<a href='/my/awesome/url' class='mention hovercardable'>Foo Bar</a>"
+md.render("@{User Name; user@pod.tld}"); // => "@<a href='/people/1337' class='mention'>User Name</a>"
+md.render("@{user@pod.tld}"); // => "@<a href='/people/1337' class='mention'>Alice Awesome</a>"
+md.render("@{Foo Bar; foo@bar.baz}"); // => "@<a href='/my/awesome/url' class='mention hovercardable'>Foo Bar</a>"
 ```
 
 _Differences in the browser._ If you load the script directly into the page, without a

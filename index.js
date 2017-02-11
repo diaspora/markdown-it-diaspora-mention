@@ -96,6 +96,11 @@ class MentionPlugin {
         tokens.push(token);
       }
 
+      token = new state.Token("text", "", 0);
+      token.content = "@";
+      token.level = level;
+      tokens.push(token);
+
       const person = this.findPersonById(diasporaId);
 
       if (person) {
